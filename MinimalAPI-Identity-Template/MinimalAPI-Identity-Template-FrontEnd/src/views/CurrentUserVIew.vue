@@ -1,5 +1,7 @@
 <script setup>
 import { inject, ref } from "vue";
+import { useI18n } from "vue-i18n";
+const { t } = useI18n({ useScope: "global" });
 
 const axios = inject("axios");
 const successData = ref({});
@@ -39,10 +41,10 @@ const updateNickname = async () => {
       <div class="mb-2">
         <div>
           <button @click="getCurrentUser" class="my-1 mx-1 py-1 px-3 bg-green-600 text-white rounded">
-            取得目前登入的使用者資料
+            {{ t("buttons.getCurrentLoggedInUserData")}}
           </button>
         </div>
-        <p class="text-xl">目前登入的使用者資料</p>
+        <p class="text-xl">{{ t("pages.currentUser.title") }}</p>
   
         <div>
           <ul>
@@ -63,10 +65,10 @@ const updateNickname = async () => {
       </div>
       <div class="flex flex-col gap-y-2">
         <div class="flex flex-col gap-y-2">
-          <label for="nickname">新的 Nickname</label>
+          <label for="nickname">{{ t("pages.currentUser.nicknameLabel") }}</label>
           <input type="text" id="nickname" v-model="updateNicknameModel">
           <div>
-            <button @click="updateNickname" class="my-1 mx-1 py-1 px-3 bg-green-600 text-white rounded">編輯</button>
+            <button @click="updateNickname" class="my-1 mx-1 py-1 px-3 bg-green-600 text-white rounded">{{ t("buttons.edit")}}</button>
           </div>
         </div>
         <div>

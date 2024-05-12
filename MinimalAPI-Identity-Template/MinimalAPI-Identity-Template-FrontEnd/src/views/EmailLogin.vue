@@ -1,5 +1,7 @@
 <script setup>
 import { inject, ref } from "vue";
+import { useI18n } from "vue-i18n";
+const { t } = useI18n({ useScope: "global" });
 const axios = inject("axios");
 const email = ref("");
 const successData = ref({});
@@ -26,30 +28,35 @@ const sendLoginEmail = async () => {
 <template>
   <main>
     <div>
-      <p class="text-xl">Email 取得無密碼登入連結</p>
+      <p class="text-xl">{{ t("pages.emailLogin.title") }}</p>
       <div>
         <div class="flex flex-col gap-y-2">
           <label for="email">Email</label>
           <input v-model="email" type="text" id="email" />
-          <button @click="sendLoginEmail" class="my-1 mx-1 py-1 px-3 bg-green-600 text-white rounded">送出</button>
+          <button
+            @click="sendLoginEmail"
+            class="my-1 mx-1 py-1 px-3 bg-green-600 text-white rounded"
+          >
+            {{ t("buttons.submit") }}
+          </button>
         </div>
       </div>
       <div>
-      <ul>
-        Error Status:
-        <span>{{ errorData.status }}</span>
-        <li>{{ errorData.errors }}</li>
-      </ul>
-    </div>
-    <div>
-      <ul>
-        Success Status:
-        <span>{{ successData.status }}</span>
-        <li>
-          {{ successData.data }}
-        </li>
-      </ul>
-    </div>
+        <ul>
+          Error Status:
+          <span>{{ errorData.status }}</span>
+          <li>{{ errorData.errors }}</li>
+        </ul>
+      </div>
+      <div>
+        <ul>
+          Success Status:
+          <span>{{ successData.status }}</span>
+          <li>
+            {{ successData.data }}
+          </li>
+        </ul>
+      </div>
     </div>
   </main>
 </template>

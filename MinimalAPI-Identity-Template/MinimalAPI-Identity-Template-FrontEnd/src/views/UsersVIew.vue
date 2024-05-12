@@ -1,5 +1,7 @@
 <script setup>
 import { inject, ref } from "vue";
+import { useI18n } from "vue-i18n";
+const { t } = useI18n({ useScope: "global" });
 
 const axios = inject("axios");
 const successData = ref({});
@@ -53,10 +55,10 @@ const deleteUser = async (userId) => {
     <div>
       <div>
         <button @click="getUserList" class="my-1 mx-1 py-1 px-3 bg-green-600 text-white rounded">
-          取得使用者列表
+          {{ t("buttons.getUserList") }}
         </button>
       </div>
-      <p class="text-xl">使用者列表</p>
+      <p class="text-xl">{{ t("pages.userList.title") }}</p>
       <div>
         <ul>
           Error Status:
@@ -76,9 +78,9 @@ const deleteUser = async (userId) => {
                 @click="updateNickname(user)"
                 class="my-1 mx-1 py-1 px-3 bg-green-600 text-white rounded"
               >
-                編輯
+              {{ t("buttons.edit") }}
               </button>
-              <button @click="deleteUser(user.id)" class="my-1 mx-1 py-1 px-3 bg-red-400 text-white rounded">刪除</button>
+              <button @click="deleteUser(user.id)" class="my-1 mx-1 py-1 px-3 bg-red-400 text-white rounded">{{ t("buttons.delete") }}</button>
             </div>
           </li>
         </ul>

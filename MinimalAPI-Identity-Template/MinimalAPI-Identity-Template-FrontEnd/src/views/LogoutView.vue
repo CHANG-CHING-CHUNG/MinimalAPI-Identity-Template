@@ -1,5 +1,7 @@
 <script setup>
 import { inject, ref } from "vue";
+import { useI18n } from "vue-i18n";
+const { t } = useI18n({ useScope: "global" });
 const axios = inject("axios");
 
 const successData = ref({});
@@ -23,9 +25,9 @@ const logoutUser = async () => {
 
 <template>
   <main>
-    <p class="text-xl">目前登入狀態</p>
+    <p class="text-xl">{{ t("pages.logout.title") }}</p>
     <button @click="logoutUser" class="my-1 mx-1 py-1 px-3 bg-green-600 text-white rounded">
-      送出
+      {{ t("buttons.submit") }}
     </button>
     <div>
       <ul>

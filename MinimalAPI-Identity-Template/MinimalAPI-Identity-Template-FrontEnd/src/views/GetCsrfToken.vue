@@ -1,5 +1,7 @@
 <script setup>
 import { inject, ref } from "vue";
+import { useI18n } from "vue-i18n";
+const { t } = useI18n({ useScope: "global" });
 const axios = inject("axios");
 const csrfToken = ref("");
 const cookie = ref("");
@@ -50,9 +52,9 @@ const validateCsrfToken = async () => {
   <main>
     <div class="mb-4">
       <button @click="getCsrfToken" class="my-1 mx-1 py-1 px-3 bg-green-600 text-white rounded">
-        取得 Token
+        {{ t("buttons.getCsrfToken") }}
       </button>
-      <p class="text-xl">已取得的 CSRF Token</p>
+      <p class="text-xl">{{ t("pages.csrfToken.title") }}</p>
       <div>
         <ul>
           <li>
@@ -85,7 +87,7 @@ const validateCsrfToken = async () => {
         @click="validateCsrfToken"
         class="my-1 mx-1 py-1 px-3 bg-green-600 text-white rounded"
       >
-        驗證 Token
+      {{ t("buttons.validateToken") }}
       </button>
 
       <div>

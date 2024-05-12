@@ -1,5 +1,7 @@
 <script setup>
 import { inject, ref } from "vue";
+import { useI18n } from "vue-i18n";
+const { t } = useI18n({ useScope: "global" });
 const axios = inject("axios");
 const email = ref("");
 const nickname = ref("");
@@ -35,7 +37,7 @@ const registerNewUser = async () => {
       <label for="password">Password</label>
       <input type="password" id="password" v-model="password" />
       <button @click="registerNewUser" class="my-1 mx-1 py-1 px-3 bg-green-600 text-white rounded">
-        送出
+        {{ t("buttons.submit") }}
       </button>
     </div>
     <div>

@@ -1,7 +1,9 @@
 <script setup>
 import { inject, ref } from "vue";
-import { useRoute } from 'vue-router';
-const route = useRoute()
+import { useRoute } from "vue-router";
+import { useI18n } from "vue-i18n";
+const { t } = useI18n({ useScope: "global" });
+const route = useRoute();
 const axios = inject("axios");
 const email = ref("");
 const userId = ref(route.query.userId || "");
@@ -34,7 +36,7 @@ const resetNewPassword = async () => {
     .post("/api/identity/user-manage/confirm-reset-password", {
       userId: userId.value,
       token: token.value,
-      newPassword: newPassword.value
+      newPassword: newPassword.value,
     })
     .then((res) => (resetSuccessData.value = res.data))
     .catch((errors) => {
@@ -50,12 +52,17 @@ const resetNewPassword = async () => {
 <template>
   <main>
     <div class="mb-4">
-      <p class="text-xl">忘記密碼：取得重設密碼連結</p>
+      <p class="text-xl">{{ t("pages.forgotPassword.getResetLinkTitle") }}</p>
       <div>
         <div class="flex flex-col gap-y-2">
           <label for="email">Email</label>
           <input v-model="email" type="text" id="email" />
-          <button @click="sendForgotPasswordEmail" class="my-1 mx-1 py-1 px-3 bg-green-600 text-white rounded">送出</button>
+          <button
+            @click="sendForgotPasswordEmail"
+            class="my-1 mx-1 py-1 px-3 bg-green-600 text-white rounded"
+          >
+          {{ t("buttons.submit") }}
+          </button>
         </div>
       </div>
       <div>
@@ -76,14 +83,19 @@ const resetNewPassword = async () => {
       </div>
     </div>
     <div>
-      <p class="text-xl">忘記密碼：重設新密碼</p>
+      <p class="text-xl">{{ t("pages.forgotPassword.resetPasswordTitle") }}</p>
       <div>
         <div class="flex flex-col gap-y-2">
           <input v-model="userId" type="text" id="userId" />
           <input v-model="token" type="text" id="token" />
           <label for="newPassword">New Password</label>
           <input v-model="newPassword" type="text" id="newPassword" />
-          <button @click="resetNewPassword" class="my-1 mx-1 py-1 px-3 bg-green-600 text-white rounded">送出</button>
+          <button
+            @click="resetNewPassword"
+            class="my-1 mx-1 py-1 px-3 bg-green-600 text-white rounded"
+          >
+            {{ t("buttons.submit") }}
+          </button>
         </div>
       </div>
       <div>
